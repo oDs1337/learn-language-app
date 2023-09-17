@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TopNavBarComponent } from './components/top-nav-bar/top-nav-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
+    RouterModule,
   ],
   exports: [
     TopNavBarComponent,

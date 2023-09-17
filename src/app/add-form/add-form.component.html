@@ -1,0 +1,25 @@
+<main>
+  <div class="addNewRecordForm addNewRecordForm--frame">
+    <form class="addNewRecordForm" [formGroup]="addNewRecord" (ngSubmit)="onSubmit(addNewRecord.value)">
+      <div class="addNewRecordForm__title">
+        <h2>Add a new Swedish word:</h2>
+      </div>
+      <mat-form-field>
+        <mat-label>Word in Swedish</mat-label>
+        <input matInput formControlName="word">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Word in Swedish (plural)</mat-label>
+        <input matInput formControlName="wordPlural">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Picture url</mat-label>
+        <input matInput formControlName="pictureUrl">
+      </mat-form-field>
+      <div class="addNewRecordForm__buttons">
+        <button mat-raised-button color="warn" (click)="resetForm()">Reset</button>
+        <button mat-raised-button color="primary"  [disabled]="addNewRecord.invalid" type="submit">Add new</button>
+      </div>
+    </form>
+  </div>
+</main>
