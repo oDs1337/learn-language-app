@@ -3,6 +3,9 @@
 # Credentials
 /Credentials
 
+#env
+/environments
+
 # Compiled output
 /dist
 /tmp
