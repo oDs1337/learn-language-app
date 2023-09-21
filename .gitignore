@@ -4,7 +4,7 @@
 /Credentials
 
 #env
-.environment.production.ts
+/environment/*
 
 # Compiled output
 /dist
