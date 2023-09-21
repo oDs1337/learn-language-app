@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-add-form',
-  templateUrl: './add-form.component.html',
-  styleUrls: ['./add-form.component.scss']
+  selector: 'app-learn',
+  templateUrl: './learn.component.html',
+  styleUrls: ['./learn.component.scss']
 })
-export class AddFormComponent implements OnInit {
+export class LearnComponent implements OnInit {
 
-  addNewRecord!: FormGroup;
+  learnForm!: FormGroup;
 
   ngOnInit(): void {
-    this.addNewRecord = new FormGroup({
+    this.learnForm = new FormGroup({
       word: new FormControl('', [
         Validators.required,
         Validators.minLength(1),
@@ -22,11 +22,6 @@ export class AddFormComponent implements OnInit {
         Validators.minLength(1),
         Validators.maxLength(64),
       ]),
-      pictureUrl: new FormControl('', [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(1024),
-      ]),
     })
   }
 
@@ -35,6 +30,6 @@ export class AddFormComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.addNewRecord.reset();
+    this.learnForm.reset();
   }
 }

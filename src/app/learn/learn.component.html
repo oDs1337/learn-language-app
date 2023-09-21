@@ -1,0 +1,21 @@
+<main>
+  <div class="container--frame">
+    <form class="learnForm" [formGroup]="learnForm" (ngSubmit)="onSubmit(learnForm.value)">
+      <div class="learnForm__picture">
+        <img src="https://www.bhg.com/thmb/ov2S31znAvSCXqrpgJQ8rwBgzp8=/2250x0/filters:no_upscale():strip_icc()/BHG-milk-bread-4CdeIL1uKGyB5ryU8J_EED-aaa76729c86a413ca7500029edba79f0.jpg" alt="Picture of the word">
+      </div>
+      <mat-form-field>
+        <mat-label>Word in Swedish</mat-label>
+        <input matInput formControlName="word">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Word in Swedish (plural)</mat-label>
+        <input matInput formControlName="wordPlural">
+      </mat-form-field>
+      <div class="learnForm__buttons">
+        <button mat-raised-button color="warn" (click)="resetForm()">Reset</button>
+        <button mat-raised-button color="primary" [disabled]="learnForm.invalid" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</main>

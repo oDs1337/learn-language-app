@@ -1,6 +1,6 @@
 export interface Record {
-  id: number;
+  id: number | null;
   word: string;
   wordPlural: string;
-  pictureUrl: string;
+  pictureUrl: string | null;
 }

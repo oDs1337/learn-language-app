@@ -1,0 +1,51 @@
+$block-width: 350px;
+$block-height: 440px;
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.learnForm {
+  width: $block-width;
+  height: $block-height;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+
+  ::ng-deep mat-form-field {
+    width: inherit;
+  }
+
+  &__picture{
+    width: $block-width;
+    height: 190px;
+    img{
+      height: inherit;
+      width: inherit;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+  }
+
+  &__buttons {
+    width: inherit;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+}
+
+.container--frame {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  font-family: 'Comfortaa';
+  font-size: 22px;
+  border-radius: 24px;
+}
