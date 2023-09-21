@@ -49,9 +49,9 @@ export class AddFormComponent implements OnInit {
   }
 
   onSubmit(formValues: FormGroup<any>): void{
-    this.api.postWord(formValues.value).subscribe((response) => {
-      console.log(response);
-     });
+    this.api.postWord(formValues.value).subscribe({
+      error: error => console.error('There was an error!', error)
+    });
   }
 
   resetForm(): void {

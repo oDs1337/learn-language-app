@@ -1,9 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Word } from '../shared/Interfaces/word';
 import { ApiService } from '../services/api/api.service';
 import * as _ from 'lodash';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-learn',
@@ -11,10 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./learn.component.scss']
 })
 
+
+
 export class LearnComponent implements OnInit {
 
   swedishWords: Word[] = [];
-  currentWord = signal<Word>({word_single_indefinite: '', word_single_definite: '', word_plural_indefinite: '', word_plural_definite: '', word_plural_genitive: '', picture_url: ''});
+  currentWord = signal<any>({word_single_indefinite: '', word_single_definite: '', word_plural_indefinite: '', word_plural_definite: '', word_plural_genitive: '', picture_url: ''});
   learnForm!: FormGroup;
 
   constructor(private _snackBar: MatSnackBar, private api: ApiService) {}
@@ -24,7 +27,7 @@ export class LearnComponent implements OnInit {
     this.createForm();
   }
 
-  createForm(): void {
+  async createForm() {
     this.learnForm = new FormGroup({
       word_single_indefinite: new FormControl('', [
         Validators.required,
@@ -53,9 +56,9 @@ export class LearnComponent implements OnInit {
     if (this.checkCorrectness(userAnswer)) {
       this.getRandomWord();
       this.resetForm();
-      this._snackBar.open('Correct!', 'Close' );
+      this._snackBar.open('Correct!', 'Close', {duration: 1000} );
     } else {
-       this._snackBar.open('Incorrect!', 'Close' );
+       this._snackBar.open('Incorrect!', 'Close', {duration: 1000});
     }
   }
 
@@ -70,13 +73,18 @@ export class LearnComponent implements OnInit {
 
   resetForm(): void {
     this.learnForm.reset();
-    this.learnForm.markAsUntouched();
+    //needs to be refactored xD
+    Object.keys(this.learnForm.controls).forEach(key => {
+      this.learnForm.get(key)?.clearValidators();
+      this.learnForm.get(key)?.updateValueAndValidity();
+      this.learnForm.controls[key].markAsUntouched();
+     });
     this.createForm();
   }
 
   getRandomWord(): void {
-    const test = Math.floor(Math.random() * this.swedishWords.length);
-    this.currentWord.set(this.swedishWords[1]);
+    const randomNumber = Math.floor(Math.random() * this.swedishWords.length);
+    this.currentWord.set(this.swedishWords[randomNumber]);
   }
 
   getWords(): void {
