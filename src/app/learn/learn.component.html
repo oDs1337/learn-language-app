@@ -1,7 +1,8 @@
 <main>
+  <ng-container *ngIf="isEmbedded">
     <form class="learnForm" autocomplete="off" [formGroup]="learnForm" (ngSubmit)="onSubmit(learnForm.value)">
       <div class="learnForm__picture">
-        <img [src]="swedishWords[0].picture_url" alt="Picture of the word">
+        <img [src]="currentWord.picture_url" alt="Picture of the word">
       </div>
       <mat-form-field>
         <mat-label>Word single indefinite</mat-label>
@@ -24,8 +25,8 @@
         <input matInput formControlName="word_plural_genitive">
       </mat-form-field>
       <div class="learnForm__buttons">
-        <button mat-raised-button color="warn" (click)="resetForm()">Reset</button>
         <button mat-raised-button color="primary" [disabled]="learnForm.invalid" type="submit">Next</button>
       </div>
     </form>
+  </ng-container>
 </main>

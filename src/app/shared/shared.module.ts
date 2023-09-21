@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    TopNavBarComponent
+    TopNavBarComponent,
   ],
   imports: [
     CommonModule,
