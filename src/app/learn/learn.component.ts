@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Word } from '../shared/Interfaces/word';
 import { ApiService } from '../services/api/api.service';
@@ -14,81 +14,77 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LearnComponent implements OnInit {
 
   swedishWords: Word[] = [];
-  currentWord: Word = {word_single_indefinite: '', word_single_definite: '', word_plural_indefinite: '', word_plural_definite: '', word_plural_genitive: '', picture_url: ''};
+  currentWord = signal<Word>({word_single_indefinite: '', word_single_definite: '', word_plural_indefinite: '', word_plural_definite: '', word_plural_genitive: '', picture_url: ''});
   learnForm!: FormGroup;
-  isEmbedded: boolean = false;
 
   constructor(private _snackBar: MatSnackBar, private api: ApiService) {}
 
   ngOnInit(): void {
     this.getWords();
-
+    this.createForm();
   }
 
   createForm(): void {
     this.learnForm = new FormGroup({
       word_single_indefinite: new FormControl('', [
         Validators.required,
-        Validators.pattern(this.currentWord.word_single_indefinite),
+        Validators.pattern(this.currentWord().word_single_indefinite),
       ]),
       word_single_definite: new FormControl('', [
         Validators.required,
-        Validators.pattern(this.currentWord.word_single_definite),
+        Validators.pattern(this.currentWord().word_single_definite),
       ]),
       word_plural_indefinite: new FormControl('', [
         Validators.required,
-        Validators.pattern(this.currentWord.word_plural_indefinite),
+        Validators.pattern(this.currentWord().word_plural_indefinite),
       ]),
       word_plural_definite: new FormControl('', [
         Validators.required,
-        Validators.pattern(this.currentWord.word_plural_definite),
+        Validators.pattern(this.currentWord().word_plural_definite),
       ]),
       word_plural_genitive: new FormControl('', [
         Validators.required,
-        Validators.pattern(this.currentWord.word_plural_genitive),
+        Validators.pattern(this.currentWord().word_plural_genitive),
       ])
     });
    }
 
   onSubmit(userAnswer: Word): void{
     if (this.checkCorrectness(userAnswer)) {
-      this._snackBar.open('Correct!', 'Close', {
-        duration: 2000,
-      });
-      setTimeout(() => {
-        this.resetForm();
-        this.learnForm.untouched;
-      }, 0);
-      this.currentWord = this.swedishWords[Math.floor(Math.random() * this.swedishWords.length)];
-      console.log(this.currentWord);
-    }
-    else {
-      this._snackBar.open('Incorrect!', 'Close', {
-        duration: 2000,
-      });
+      this.getRandomWord();
+      this.resetForm();
+      this._snackBar.open('Correct!', 'Close' );
+    } else {
+       this._snackBar.open('Incorrect!', 'Close' );
     }
   }
 
   checkCorrectness(userAnswer: Word): boolean {
     userAnswer = {
       ...userAnswer,
-      picture_url: this.currentWord?.picture_url,
-      _id: this.currentWord?._id,
+      picture_url: this.currentWord().picture_url,
+      _id: this.currentWord()._id,
     }
-    return _.isEqual(userAnswer, this.currentWord);
+    return _.isEqual(userAnswer, this.currentWord());
   }
 
   resetForm(): void {
     this.learnForm.reset();
+    this.learnForm.markAsUntouched();
+    this.createForm();
+  }
+
+  getRandomWord(): void {
+    const test = Math.floor(Math.random() * this.swedishWords.length);
+    this.currentWord.set(this.swedishWords[1]);
   }
 
   getWords(): void {
     this.api.getAllWords().subscribe({
       next: (data: Word[]) => {
         this.swedishWords = data;
-        this.currentWord = this.swedishWords[0];
-        this.createForm();
-        this.isEmbedded = true;
+        this.currentWord.set(this.swedishWords[0]);
+        this.resetForm();
       },
       error: (error: Error) => { console.error(error); },
     });

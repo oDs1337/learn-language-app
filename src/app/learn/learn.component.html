@@ -1,8 +1,7 @@
 <main>
-  <ng-container *ngIf="isEmbedded">
     <form class="learnForm" autocomplete="off" [formGroup]="learnForm" (ngSubmit)="onSubmit(learnForm.value)">
       <div class="learnForm__picture">
-        <img [src]="currentWord.picture_url" alt="Picture of the word">
+        <img [src]="currentWord().picture_url" alt="Picture of the word">
       </div>
       <mat-form-field>
         <mat-label>Word single indefinite</mat-label>
@@ -28,5 +27,4 @@
         <button mat-raised-button color="primary" [disabled]="learnForm.invalid" type="submit">Next</button>
       </div>
     </form>
-  </ng-container>
 </main>
