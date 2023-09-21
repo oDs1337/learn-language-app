@@ -55,8 +55,12 @@ export class LearnComponent implements OnInit {
       this._snackBar.open('Correct!', 'Close', {
         duration: 2000,
       });
-      this.resetForm();
+      setTimeout(() => {
+        this.resetForm();
+        this.learnForm.untouched;
+      }, 0);
       this.currentWord = this.swedishWords[Math.floor(Math.random() * this.swedishWords.length)];
+      console.log(this.currentWord);
     }
     else {
       this._snackBar.open('Incorrect!', 'Close', {
@@ -90,3 +94,4 @@ export class LearnComponent implements OnInit {
     });
   }
 }
+

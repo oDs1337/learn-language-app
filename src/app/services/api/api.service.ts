@@ -12,5 +12,9 @@ export class ApiService {
 
   getAllWords(): Observable<Word[]> {
     return this.http.get<Word[]>('http://127.0.0.1:8000/get_all_words',);
-   }
+  }
+
+  postWord(payload: Word) {
+    return this.http.post<Word>('http://127.0.0.1:8000/add_word', payload);
+  }
 }

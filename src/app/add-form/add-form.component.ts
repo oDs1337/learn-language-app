@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../services/api/api.service';
 
 @Component({
   selector: 'app-add-form',
@@ -9,6 +10,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AddFormComponent implements OnInit {
 
   addNewRecord!: FormGroup;
+
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
     this.addNewRecord = new FormGroup({
@@ -46,7 +49,9 @@ export class AddFormComponent implements OnInit {
   }
 
   onSubmit(formValues: FormGroup<any>): void{
-    console.log(formValues);
+    this.api.postWord(formValues.value).subscribe((response) => {
+      console.log(response);
+     });
   }
 
   resetForm(): void {
