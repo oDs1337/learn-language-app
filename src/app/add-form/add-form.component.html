@@ -1,25 +1,35 @@
 <main>
-  <div class="container--frame">
-    <form class="addNewRecordForm" [formGroup]="addNewRecord" (ngSubmit)="onSubmit(addNewRecord.value)">
+    <form class="addNewRecordForm" autocomplete="off" [formGroup]="addNewRecord" (ngSubmit)="onSubmit(addNewRecord.value)">
       <div class="addNewRecordForm__title">
         <h2>Add a new Swedish word:</h2>
       </div>
       <mat-form-field>
-        <mat-label>Word in Swedish</mat-label>
-        <input matInput formControlName="word">
+        <mat-label>Word single indefinite</mat-label>
+        <input matInput formControlName="word_single_indefinite">
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Word in Swedish (plural)</mat-label>
-        <input matInput formControlName="wordPlural">
+        <mat-label>Word single definite</mat-label>
+        <input matInput formControlName="word_single_definite">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Word plural indefinite</mat-label>
+        <input matInput formControlName="word_plural_indefinite">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Word plural definite</mat-label>
+        <input matInput formControlName="word_plural_definite">
+      </mat-form-field>
+        <mat-form-field>
+          <mat-label>Word plural generative</mat-label>
+          <input matInput formControlName="word_plural_genitive">
       </mat-form-field>
       <mat-form-field>
         <mat-label>Picture url</mat-label>
-        <input matInput formControlName="pictureUrl">
+        <input matInput formControlName="picture_url">
       </mat-form-field>
       <div class="addNewRecordForm__buttons">
         <button mat-raised-button color="warn" (click)="resetForm()">Reset</button>
         <button mat-raised-button color="primary"  [disabled]="addNewRecord.invalid" type="submit">Add new</button>
       </div>
     </form>
-  </div>
 </main>

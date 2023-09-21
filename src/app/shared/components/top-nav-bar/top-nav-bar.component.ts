@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-nav-bar',
@@ -7,5 +6,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./top-nav-bar.component.scss']
 })
 export class TopNavBarComponent {
-  constructor(private router: Router) {}
+
+  title: string = "Swedish words"
 }
