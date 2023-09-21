@@ -11,7 +11,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getAllWords(): Observable<Word[]> {
-    return this.http.get<Word[]>('http://127.0.0.1:8000/get_all_words',);
+    return this.http.get<Word[]>('http://127.0.0.1:8000/get_all_words');
   }
 
   postWord(payload: Word) {
