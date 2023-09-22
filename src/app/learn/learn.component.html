@@ -1,7 +1,7 @@
 <main>
     <form class="learnForm" autocomplete="off" [formGroup]="learnForm" (ngSubmit)="onSubmit(learnForm.value)">
       <div class="learnForm__picture">
-        <img [src]="currentWord().picture_url" alt="Picture of the word">
+        <img [src]="currentWord().picture_url" [alt]="currentWord().word_single_indefinite">
       </div>
       <mat-form-field>
         <mat-label>Word single indefinite</mat-label>
