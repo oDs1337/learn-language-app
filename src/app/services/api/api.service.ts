@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Word } from 'src/app/shared/Interfaces/word';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

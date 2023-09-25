@@ -4,7 +4,7 @@ import { Word } from '../shared/Interfaces/word';
 import { ApiService } from '../services/api/api.service';
 import * as _ from 'lodash';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-learn',
@@ -23,6 +23,7 @@ export class LearnComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private api: ApiService) {}
 
   ngOnInit(): void {
+    console.log(environment.apiUrl);
     this.getWords();
     this.createForm();
   }

@@ -4,7 +4,7 @@
 /Credentials
 
 #env
-/environment/*
+src/environments/environment.development.ts
 
 # Compiled output
 /dist
